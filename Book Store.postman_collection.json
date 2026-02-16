@@ -1,0 +1,850 @@
+{
+  "info": {
+    "_postman_id": "f5a28224-5679-4e1e-9fb1-61d2d3a697df",
+    "name": "Book Store",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "auth-service",
+      "item": [
+        {
+          "name": "sign-in",
+          "item": [
+            {
+              "name": "Sign in",
+              "id": "6a6ba2aa-0193-41c4-9321-47de8236ad32",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"Baku@2020\",\r\n    \"keepMeSignedIn\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/auth/signin",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "auth",
+                    "signin"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "OTP Verification",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "id": "15790dc3-f692-4fe3-9969-459d377efc6a",
+                    "exec": [
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "id": "8de546f5-1139-4dc7-a5b7-f87c5803dfcb",
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"otp\": 804488\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/auth/2fa/otp",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "auth",
+                    "2fa",
+                    "otp"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Sign out",
+              "id": "d112c7cd-4f30-46ef-b6a2-5a26cc78f49a",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwOTg1MjMxLCJleHAiOjE3NzE1OTAwMzEsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.z6fLZxV2-nXrcP3xN9qEzUyoY5JlCAmQVFGHK2aPqxU",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "4cb016a6-a269-4250-8e23-89ef8c67944d",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/auth/signout",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "auth",
+                    "signout"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "d25c2170-4a84-45fd-bf31-9db2c246b1b8"
+        },
+        {
+          "name": "sign-up",
+          "item": [
+            {
+              "name": "Sign Up",
+              "id": "fce6a428-ffc3-4477-b108-f1ddc3059cfe",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Elgun\",\r\n    \"lastName\": \"Zamanov\",\r\n    \"email\": \"elgunzamanv@gmail.com\",\r\n    \"password\": \"Baku@2020\",\r\n    \"acceptTerms\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/auth/signup",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "auth",
+                    "signup"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Verify Email",
+              "id": "45879f1e-f0f5-46d0-85b4-9e50dc194225",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/auth/signup/verify-email?token=3b035a43-f032-4ab2-8dd6-54278f021df2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "auth",
+                    "signup",
+                    "verify-email"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "3b035a43-f032-4ab2-8dd6-54278f021df2"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "7a2b8b28-c661-4179-93eb-36a920ce1531"
+        },
+        {
+          "name": "Trigger CSRF Token",
+          "id": "6a1bd89c-c296-4463-9b5d-fb1212ff7860",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8072/bookstore/api/v1/auth/csrf-token",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8072",
+              "path": [
+                "bookstore",
+                "api",
+                "v1",
+                "auth",
+                "csrf-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "id": "7118fb9f-c14d-48df-88c3-d71bbedeacce"
+    },
+    {
+      "name": "user-service",
+      "item": [
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "Get User",
+              "id": "d73eda90-7b9b-48e4-b48c-f66c34ea5d7c",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwODg3MzIyLCJleHAiOjE3NzE0OTIxMjIsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.fo2uB87ax10sdVoQClECJpCrtV5upGTLgHO2dyXrbZs",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "57b813da-dc6d-4e49-8fd0-476ff1dbf7ac",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/users/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Users",
+              "id": "575f2fba-dc4d-4b32-839c-a2291d468681",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcxMTM2NTU4LCJleHAiOjE3NzE3NDEzNTgsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.Jdiu1CrbnLNMSOr3kdAYIlBi0C1O-WyWfLoqX7t5Izo",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "f3cc752b-f573-4571-95fa-9efc776d79d9",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/users/page/1?pageSize=5",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "users",
+                    "page",
+                    "1"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "5"
+                    },
+                    {
+                      "key": "search",
+                      "value": "julia.roberts@example.com",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update User",
+              "id": "4dd5b4f6-712c-4100-9b4a-fe4af37f112d",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwODQxNzI4LCJleHAiOjE3NzE0NDY1MjgsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.gjCtv1GM-NXTTUqnZQFgpcAmYp_BRKWROCjr4hUltTU",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"publisher\",\r\n    \"lastName\": \"publisher\",\r\n    \"email\": \"publisher@example.com\",\r\n    \"isEnabled\": false,\r\n    \"roles\": [\r\n        {\r\n            \"name\": \"PUBLISHER\"\r\n        }\r\n    ]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/users/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete User",
+              "id": "a89b8c72-20d5-460a-85af-96c0f5c67741",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwNTU4MjE2LCJleHAiOjE3NzExNjMwMTYsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.L-BQ4DE5FaLpoh5lJlJKsB06j7cMMg8Z4o5aGZo8OuA",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/users/2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "users",
+                    "2"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "b578d0ee-55f6-410c-8464-ca705838eecc"
+        },
+        {
+          "name": "role",
+          "item": [
+            {
+              "name": "Get All Roles",
+              "id": "8af1f8b5-2529-4910-ad74-76348abd00db",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcxMTM2NTU4LCJleHAiOjE3NzE3NDEzNTgsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.Jdiu1CrbnLNMSOr3kdAYIlBi0C1O-WyWfLoqX7t5Izo",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "f3cc752b-f573-4571-95fa-9efc776d79d9",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/users/roles",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "users",
+                    "roles"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "e0d990d5-9f2d-498f-a369-56e8c9fc0ff5"
+        }
+      ],
+      "id": "cd552e0b-2feb-4841-8d3b-b3233581a9cb"
+    },
+    {
+      "name": "book-service",
+      "item": [
+        {
+          "name": "author",
+          "item": [
+            {
+              "name": "Create Author",
+              "id": "e63288fd-a5b1-4cfe-88e4-ed8d1431e8da",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcxMTM2NTU4LCJleHAiOjE3NzE3NDEzNTgsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.Jdiu1CrbnLNMSOr3kdAYIlBi0C1O-WyWfLoqX7t5Izo",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "f3cc752b-f573-4571-95fa-9efc776d79d9",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"firstName\": \"Jamal\",\r\n    \"lastName\": \"Musiala\",\r\n    \"bio\": \"Technical editor and co-author.\",\r\n    \"dateOfBirth\": \"1980-06-15\",\r\n    \"dateOfDeath\": null,\r\n    \"nationality\": \"British\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Author",
+              "id": "71b8149a-c94a-499e-8169-a92039b89f06",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Authors",
+              "id": "765ababf-5703-4738-b257-668ac69bab86",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsImVtYWlsIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcxMTM2NTU4LCJleHAiOjE3NzE3NDEzNTgsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.Jdiu1CrbnLNMSOr3kdAYIlBi0C1O-WyWfLoqX7t5Izo",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "f3cc752b-f573-4571-95fa-9efc776d79d9",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors/page/1?pageSize=5",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors",
+                    "page",
+                    "1"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "5"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Jamal Musiala",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get All Authors",
+              "id": "ebb9a492-dd07-44e6-91e8-293fec71e70f",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwNTU4MjE2LCJleHAiOjE3NzExNjMwMTYsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.L-BQ4DE5FaLpoh5lJlJKsB06j7cMMg8Z4o5aGZo8OuA",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors"
+                  ],
+                  "query": [
+                    {
+                      "key": "search",
+                      "value": "Jamal Musiala",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Author",
+              "id": "849c8d84-8024-4f4f-a17c-04c5a4027b4f",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"firstName\": \"Leo\",\r\n  \"lastName\": \"Messi\",\r\n  \"bio\": \"English novelist and essayist, journalist and critic.\",\r\n  \"dateOfBirth\": \"1903-06-25\",\r\n  \"dateOfDeath\": \"1950-01-21\",\r\n  \"nationality\": \"Argentina\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Author",
+              "id": "a25812ab-f3e3-41bd-93c7-da97338a1a05",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/authors/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "authors",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "e4a84270-67ee-47ec-88a6-49334f4a215a"
+        },
+        {
+          "name": "book",
+          "item": [
+            {
+              "name": "Create Book",
+              "id": "dd938141-997b-4415-a0a0-52897d70e0c6",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwNTU4MjE2LCJleHAiOjE3NzExNjMwMTYsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.L-BQ4DE5FaLpoh5lJlJKsB06j7cMMg8Z4o5aGZo8OuA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"title\": \"Clean Architecture\",\r\n    \"subtitle\": \"A Craftsman's Guide to Software Structure and Design\",\r\n    \"description\": \"A comprehensive guide to building maintainable, scalable software systems.\",\r\n    \"languageCode\": \"en\",\r\n    \"publicationDate\": \"2017-09-20\",\r\n    \"edition\": 1,\r\n    \"isbn\": \"9780134494169\",\r\n    \"price\": 42.99,\r\n    \"currency\": \"USD\",\r\n    \"stockQuantity\": 15,\r\n    \"pageCount\": 432,\r\n    \"coverImageUrl\": \"https://example.com/images/clean-architecture.jpg\",\r\n    \"authorIds\": [1]\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Book",
+              "id": "5caa1989-dba9-4cbf-be38-916cdaf88c35",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJFbGd1biBaYW1hbm92Iiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwMjcwMzEwLCJleHAiOjE3NzA4NzUxMTAsImF1dGhvcml0aWVzIjoiUk9MRV9VU0VSIn0.ZYqj3YWH3tBcqBEIieybwjDRMXeeeW-dm1x_L_I0ax4",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Get Books",
+              "id": "e4d92264-c19d-472d-bbf6-863c9073386a",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwNTU4MjE2LCJleHAiOjE3NzExNjMwMTYsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.L-BQ4DE5FaLpoh5lJlJKsB06j7cMMg8Z4o5aGZo8OuA",
+                    "type": "text"
+                  },
+                  {
+                    "key": "X-XSRF-TOKEN",
+                    "value": "0da12898-f95a-4095-96a0-584585220ccd",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/page/1?pageSize=5",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "page",
+                    "1"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageSize",
+                      "value": "5"
+                    },
+                    {
+                      "key": "search",
+                      "value": "Jamal Musiala",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Update Book",
+              "id": "a155ab69-4fdd-411e-90c5-f7422a1bb345",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJCb29rIFN0b3JlIiwic3ViIjoiYm9va3N0b3JlLmNvbSIsInVzZXJuYW1lIjoiZWxndW56YW1hbnZAZ21haWwuY29tIiwiaWF0IjoxNzcwNTU4MjE2LCJleHAiOjE3NzExNjMwMTYsImF1dGhvcml0aWVzIjoiUk9MRV9BRE1JTiJ9.L-BQ4DE5FaLpoh5lJlJKsB06j7cMMg8Z4o5aGZo8OuA",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"2Clean Solution\",\r\n  \"subtitle\": \"2A Craftsman's Guide to Software Structure and Design\",\r\n  \"description\": \"A comprehensive guide to building maintainable, scalable software systems.\",\r\n  \"languageCode\": \"en\",\r\n  \"publicationDate\": \"2017-09-20\",\r\n  \"edition\": 2,\r\n  \"price\": 42.99,\r\n  \"currency\": \"USD\",\r\n  \"stockQuantity\": 15,\r\n  \"pageCount\": 23,\r\n  \"coverImageUrl\": \"https://example.com/images/clean-architecture.jpg\",\r\n  \"authorIds\": [1, 4]\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Delete Book",
+              "id": "b6a2776b-7581-44bb-96e7-33d17cfa22f6",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:8072/bookstore/api/v1/books/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "8072",
+                  "path": [
+                    "bookstore",
+                    "api",
+                    "v1",
+                    "books",
+                    "1"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "id": "192e7864-f2d0-476f-ba83-af26572ffe7e"
+        }
+      ],
+      "id": "e5d064da-05b6-422a-83ed-46d85c41e0b8"
+    }
+  ]
+}
