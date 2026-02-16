@@ -1,0 +1,30 @@
+﻿services:
+   network-deploy-service:
+      networks:
+         - bookstore
+   
+   microservice-db-config:
+      extends:
+         service: network-deploy-service
+      image: mysql:8.0
+      healthcheck:
+         test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+         timeout: 10s
+         retries: 10
+         interval: 10s
+         start_period: 20s
+      environment:
+         MYSQL_ROOT_PASSWORD: root
+   
+   microservice-base-config:
+      extends:
+         service: network-deploy-service
+      deploy:
+         resources:
+            limits:
+               memory: 700m
+      environment:
+         # Localhost-u Docker servis adları ilə əvəz edirik
+         SPRING_DATA_REDIS_HOST: redis
+         SPRING_MAIL_HOST: mailhog
+         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-server:8070/eureka/

@@ -1,0 +1,147 @@
+services:
+   usersdb:
+      container_name: usersdb
+      ports:
+         - "3306:3306"
+      environment:
+         MYSQL_DATABASE: usersdb
+      extends:
+         file: common-config.yml
+         service: microservice-db-config
+   
+   booksdb:
+      container_name: booksdb
+      ports:
+         - "3307:3306"
+      environment:
+         MYSQL_DATABASE: booksdb
+      extends:
+         file: common-config.yml
+         service: microservice-db-config
+   
+   redis:
+      image: redis:7
+      container_name: redis
+      ports:
+         - "6379:6379"
+      healthcheck:
+         test: ["CMD", "redis-cli", "ping"]
+         interval: 5s
+         timeout: 3s
+         retries: 5
+      extends:
+         file: common-config.yml
+         service: network-deploy-service
+   
+   mailhog:
+      image: mailhog/mailhog:latest
+      container_name: mailhog
+      ports:
+         - "1025:1025"
+         - "8025:8025"
+      extends:
+         file: common-config.yml
+         service: network-deploy-service
+   
+   discovery-server:
+      image: "elgunzamanov/discovery-server:v1"
+      container_name: discovery-server
+      ports:
+         - "8070:8070"
+      healthcheck:
+         test: ["CMD-SHELL", "curl -f http://localhost:8070/actuator/health/readiness | grep UP || exit 1"]
+         interval: 10s
+         timeout: 5s
+         retries: 10
+         start_period: 20s
+      extends:
+         file: common-config.yml
+         service: microservice-base-config
+   
+   auth-service:
+      image: "elgunzamanov/auth-service:v1"
+      container_name: auth-service
+      ports:
+         - "9000:9000"
+      depends_on:
+         discovery-server:
+            condition: service_healthy
+         redis:
+            condition: service_healthy
+      healthcheck:
+         test: [ "CMD-SHELL", "curl -I -s http://localhost:9000/actuator/health/readiness | grep -q 'HTTP/' || exit 1" ]
+         interval: 10s
+         timeout: 5s
+         retries: 10
+         start_period: 40s
+      extends:
+         file: common-config.yml
+         service: microservice-base-config
+   
+   user-service:
+      image: "elgunzamanov/user-service:v1"
+      container_name: user-service
+      ports:
+         - "8080:8080"
+      environment:
+         SPRING_DATASOURCE_URL: jdbc:mysql://usersdb:3306/usersdb
+         SPRING_DATASOURCE_USERNAME: root
+         SPRING_DATASOURCE_PASSWORD: root
+      depends_on:
+         usersdb:
+            condition: service_healthy
+         discovery-server:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "curl -f http://localhost:8080/actuator/health/readiness | grep UP || exit 1"]
+         interval: 10s
+         timeout: 5s
+         retries: 15
+         start_period: 40s
+      extends:
+         file: common-config.yml
+         service: microservice-base-config
+   
+   book-service:
+      image: "elgunzamanov/book-service:v1"
+      container_name: book-service
+      ports:
+         - "8090:8090"
+      environment:
+         SPRING_DATASOURCE_URL: jdbc:mysql://booksdb:3306/booksdb
+         SPRING_DATASOURCE_USERNAME: root
+         SPRING_DATASOURCE_PASSWORD: root
+      depends_on:
+         booksdb:
+            condition: service_healthy
+         discovery-server:
+            condition: service_healthy
+      healthcheck:
+         test: ["CMD-SHELL", "curl -f http://localhost:8090/actuator/health/readiness | grep UP || exit 1"]
+         interval: 10s
+         timeout: 5s
+         retries: 15
+         start_period: 40s
+      extends:
+         file: common-config.yml
+         service: microservice-base-config
+   
+   gateway-service:
+      image: "elgunzamanov/gateway-service:v1"
+      container_name: gateway-service
+      ports:
+         - "8072:8072"
+      depends_on:
+         auth-service:
+            condition: service_healthy
+         user-service:
+            condition: service_healthy
+         book-service:
+            condition: service_healthy
+      extends:
+         file: common-config.yml
+         service: microservice-base-config
+
+networks:
+   bookstore:
+      driver: bridge

@@ -1,0 +1,6 @@
+.idea
+discovery-server
+auth-service
+user-service
+book-service
+gateway-service
